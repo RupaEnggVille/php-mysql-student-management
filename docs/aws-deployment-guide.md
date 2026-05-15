@@ -72,10 +72,10 @@ Open AWS Console --> Navigate to EC2 Dashboard --> Click Launch Instance --> Ins
 ```text
 Type        Port     Source
 
-SSH          22	 Your IP
-HTTP         80	 Anywhere
-Custom TCP   8080	 Anywhere
-MySQL   	   3306	 Your IP (optional)
+SSH          22      Your IP
+HTTP         80      Anywhere
+Custom TCP  8080     Anywhere
+MySQL       3306	 Your IP (optional)
 ```
 
 ## **Step 2: Connect to EC2**
@@ -137,12 +137,12 @@ sudo apt install git -y # optional (git will be installed by updating the apt pa
 git clone https://github.com/RupaEnggVille/php-mysql-student-management.git
 ```
 
-## **Step-8: Navigate into project directory:**
+## **Step 8: Navigate into project directory:**
 ```shell
 cd php-mysql-student-management
 ```
 
-## **Step-9: Verify Project Structure**
+## **Step 9: Verify Project Structure**
 ```text
 php-mysql-student-management/
 │
