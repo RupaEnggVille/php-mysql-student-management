@@ -104,6 +104,7 @@ sudo systemctl enable docker
 **Verify:**
 ```shell
 docker --version
+sudo systemctl status docker
 ```
 
 ## **Step 5: Add User to Docker Group**
