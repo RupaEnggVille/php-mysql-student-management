@@ -1,7 +1,7 @@
 <?php
 $host = "mysql";
 $user = "root";
-$password = "";
+$password = "root";
 $database = "student_management";
 
 $conn = mysqli_connect($host, $user, $password, $database);
