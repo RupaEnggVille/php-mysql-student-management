@@ -67,12 +67,15 @@ Route 53 - Domain management (optional)
 
 Open AWS Console --> Navigate to EC2 Dashboard --> Click Launch Instance --> Instance Configuration --> Set Value for number of instances --> select AMI (Ubuntu Server 22.04) --> Instance Type	(t2.micro) --> Storage Volume (10 GB) --> Key Pair (Create/Select Existing)
 ## **Configure Security Group**
+
 **Allow the following inbound rules:**
+```text
 **Type        Port     Source**
   SSH          22	   Your IP
   HTTP         80	   Anywhere
   Custom TCP   8080	   Anywhere
   MySQL   	3306	   Your IP (optional)
+```
 
 ## **Step 2: Connect to EC2**
 ```shell
