@@ -138,6 +138,7 @@ cd php-mysql-student-management
 ```
 
 ## **Step-9: Verify Project Structure**
+```text
 php-mysql-student-management/
 │
 ├── app/
@@ -148,6 +149,7 @@ php-mysql-student-management/
 ├── docs/
 ├── README.md
 └── docker-compose.yml
+```
 
 ## **Step 10: Dockerfile**
 ```shell
