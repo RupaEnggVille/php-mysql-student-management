@@ -46,20 +46,20 @@ Docker Engine
 
 ### **Before deployment, ensure you have:**
 
-AWS Account
-EC2 Key Pair (.pem file)
-Basic Linux command knowledge
-Git installed locally
-Docker knowledge (basic)
-AWS Services Used
+- AWS Account
+- EC2 Key Pair (.pem file)
+- Basic Linux command knowledge
+- Git installed locally
+- Docker knowledge (basic)
+- AWS Services Used
 
 **Service	Purpose**
-EC2 - Host application
-Security Group - Firewall rules
-IAM - Access management
-CloudWatch - Monitoring
-S3 - Backup storage (optional)
-Route 53 - Domain management (optional)
+- EC2 - Host application
+- Security Group - Firewall rules
+- IAM - Access management
+- CloudWatch - Monitoring
+- S3 - Backup storage (optional)
+- Route 53 - Domain management (optional)
 
 # **Execution Steps:**
 
@@ -70,11 +70,12 @@ Open AWS Console --> Navigate to EC2 Dashboard --> Click Launch Instance --> Ins
 
 **Allow the following inbound rules:**
 ```text
-**Type        Port     Source**
-  SSH          22	   Your IP
-  HTTP         80	   Anywhere
-  Custom TCP   8080	   Anywhere
-  MySQL   	3306	   Your IP (optional)
+Type        Port     Source
+
+SSH          22	 Your IP
+HTTP         80	 Anywhere
+Custom TCP   8080	 Anywhere
+MySQL   	   3306	 Your IP (optional)
 ```
 
 ## **Step 2: Connect to EC2**
