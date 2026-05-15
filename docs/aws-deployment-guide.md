@@ -15,7 +15,7 @@ The Student Marks Management System is a cloud-native web application developed 
 - Docker Compose
 - AWS EC2
 
-The application allows administrators and teachers to:
+## **The application allows administrators and teachers to:**
 
 - Add student records
 - Store marks in MySQL database
@@ -24,7 +24,7 @@ The application allows administrators and teachers to:
 
 ---
 
-# Architecture Overview
+## **Architecture Overview**
 
 ```text
 User Browser
@@ -40,9 +40,11 @@ Docker Engine
      │
      ├── PHP + Apache Container
      └── MySQL Container
-Prerequisites
+```
 
-Before deployment, ensure you have:
+## **Prerequisites**
+
+### **Before deployment, ensure you have:**
 
 AWS Account
 EC2 Key Pair (.pem file)
@@ -50,79 +52,93 @@ Basic Linux command knowledge
 Git installed locally
 Docker knowledge (basic)
 AWS Services Used
-Service	Purpose
-EC2	Host application
-Security Groups	Firewall rules
-IAM	Access management
-CloudWatch	Monitoring
-S3	Backup storage (optional)
-Route 53	Domain management (optional)
-Step 1: Launch EC2 Instance
-Create EC2 Instance
-Open AWS Console
-Navigate to EC2 Dashboard
-Click Launch Instance
-Instance Configuration
-Setting	Value
-AMI	Ubuntu Server 22.04
-Instance Type	t2.micro
-Storage	10 GB
-Key Pair	Create/Select Existing
-Step 2: Configure Security Group
 
-Allow the following inbound rules:
+**Service	Purpose**
+EC2 - Host application
+Security Group - Firewall rules
+IAM - Access management
+CloudWatch - Monitoring
+S3 - Backup storage (optional)
+Route 53 - Domain management (optional)
 
-Type	Port	Source
-SSH	22	Your IP
-HTTP	80	Anywhere
-Custom TCP	8080	Anywhere
-MySQL (Optional)	3306	Your IP
-Step 3: Connect to EC2
+# **Execution Steps:**
 
-Use SSH:
+## **Step 1: Launch EC2 Instance**
 
+Open AWS Console --> Navigate to EC2 Dashboard --> Click Launch Instance --> Instance Configuration --> Set Value for number of instances --> select AMI (Ubuntu Server 22.04) --> Instance Type	(t2.micro) --> Storage Volume (10 GB) --> Key Pair (Create/Select Existing)
+## **Configure Security Group**
+**Allow the following inbound rules:**
+**Type        Port     Source**
+  SSH          22	   Your IP
+  HTTP         80	   Anywhere
+  Custom TCP   8080	   Anywhere
+  MySQL   	3306	   Your IP (optional)
+
+## **Step 2: Connect to EC2**
+```shell
 ssh -i your-key.pem ubuntu@your-ec2-public-ip
 
-Example:
+#Example:
 
 ssh -i student-key.pem ubuntu@54.221.10.20
-Step 4: Update Ubuntu Packages
+```
+
+## **Step 3: Update Ubuntu Packages**
+```shell
 sudo apt update -y
 sudo apt upgrade -y
-Step 5: Install Docker
+```
+
+## **Step 4: Install Docker**
+```shell
 sudo apt install docker.io -y
 
-Start Docker:
+#Start Docker:
 
 sudo systemctl start docker
 sudo systemctl enable docker
-
-Verify:
-
+```
+**Verify:**
+```shell
 docker --version
-Step 6: Add User to Docker Group
+```
+
+## **Step 5: Add User to Docker Group**
+By default, only the root user can connect to the docker-daemon by CLI. If you want to connect any other user to docker-daemon, you have to add that user to docker group.
+```shell
 sudo usermod -aG docker ubuntu
-newgrp docker
+```
+After adding the user to group, better to logout and login again to run docker commands with that user.
 
-Verify:
-
+**Verify:**
+```shell
 docker ps
-Step 7: Install Docker Compose
+```
+
+## **Step 6: Install Docker Compose**
+```shell
 sudo apt install docker-compose -y
-
-Verify:
-
+```
+**Verify:**
+```shell
 docker-compose --version
-Step 8: Install Git
-sudo apt install git -y
-Step 9: Clone GitHub Repository
-git clone https://github.com/your-username/student-marks-management-system.git
+```
 
-Navigate into project directory:
+## **Step 7: Install Git**
+```shell
+sudo apt install git -y # optional (git will be installed by updating the apt package manager)
 
-cd student-marks-management-system
-Step 10: Verify Project Structure
-student-marks-management-system/
+#Clone GitHub Repository
+git clone https://github.com/RupaEnggVille/php-mysql-student-management.git
+```
+
+## **Step-8: Navigate into project directory:**
+```shell
+cd php-mysql-student-management
+```
+
+## **Step-9: Verify Project Structure**
+php-mysql-student-management/
 │
 ├── app/
 ├── database/
@@ -132,10 +148,12 @@ student-marks-management-system/
 ├── docs/
 ├── README.md
 └── docker-compose.yml
-Step 11: Dockerfile
 
-Create Dockerfile
-
+## **Step 10: Dockerfile**
+```shell
+vim Dockerfile
+```
+```text
 FROM php:8.2-apache
 
 RUN docker-php-ext-install mysqli
@@ -143,10 +161,13 @@ RUN docker-php-ext-install mysqli
 COPY . /var/www/html/
 
 EXPOSE 80
-Step 12: Docker Compose Configuration
+```
 
-Create docker-compose.yml
-
+## **Step 11: Docker Compose Configuration**
+```shell
+vim docker-compose.yml
+```
+```text
 version: '3.9'
 
 services:
@@ -175,10 +196,14 @@ services:
 
 volumes:
   mysql_data:
-Step 13: Update Database Connection
+```
 
+## **Step 12: Update Database Connection**
 Edit db.php
-
+```shell
+vim db.php
+```
+```text
 <?php
 
 $host = "mysql";
@@ -193,55 +218,65 @@ if (!$conn) {
 }
 
 ?>
-Step 14: Build and Run Containers
+```
+
+## **Step 13: Build and Run Containers**
+```shell
 docker-compose up -d --build
-
-Verify containers:
-
+```
+**Verify containers:**
+```shell
 docker ps
-
-Expected output:
-
+```
+**Expected output:**
 student-app
 student-db
-Step 15: Access the Application
 
-Open browser:
+## **Step 14: Access the Application**
+
+**Open browser:**
 
 http://your-ec2-public-ip:8080
 
 Example:
-
+```text
 http://54.221.10.20:8080
-Step 16: Verify MySQL Database
+```
+
+## **Step 15: Verify MySQL Database**
 
 Access MySQL container:
-
+```shell
 docker exec -it student-db mysql -u root -p
+```
+Password: root
 
-Password:
-
-root
-
-Show databases:
-
+To Show databases:
+```shell
 SHOW DATABASES;
-
-Use database:
-
+```
+To Use a database:
+```shell
 USE student_management;
-
-Show tables:
-
+```
+To Show tables in the database:
+```shell
 SHOW TABLES;
-Step 17: View Container Logs
+```
+To exit from the database:
+Press ctrl+p+q
+## **Step 16: View Container Logs**
 
-PHP Container:
-
+Check PHP Container logs:
+```shell
 docker logs student-app
-
-MySQL Container:
-
+```
+Check MySQL Container logs:
+```shell
 docker logs student-db
-Step 18: Stop Application
+```
+
+## **Step 17: Stop Application**
+```shell
 docker-compose down
+```
